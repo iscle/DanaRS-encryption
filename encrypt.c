@@ -7,7 +7,6 @@
 extern int _someGlobalVar;
 
 static int encryptOpcode00(uint8_t *out_buf, int out_data_len, const char *device_name) {
-    uint8_t crc_buf[12];
     uint16_t crc;
 
     if (out_data_len < 19)
@@ -15,21 +14,17 @@ static int encryptOpcode00(uint8_t *out_buf, int out_data_len, const char *devic
 
     _someGlobalVar = 0;
 
-    crc_buf[0] = 0x01;
-    crc_buf[1] = 0x00;
-    memcpy(&crc_buf[2], device_name, 10);
-    crc = generateCrc(crc_buf, sizeof(crc_buf));
-
-    out_buf[0] = 0xA5;
-    out_buf[1] = 0xA5;
-    out_buf[2] = 0x0C;
-    out_buf[3] = 0x01;
-    out_buf[4] = 0x00;
-    memcpy(&out_buf[5], device_name, 10);
-    out_buf[15] = (crc >> 8) & 0xFF;
-    out_buf[16] = (crc >> 0) & 0xFF;
-    out_buf[17] = 0x5A;
-    out_buf[18] = 0x5A;
+    out_buf[0] = 0xA5; // header 1
+    out_buf[1] = 0xA5; // header 2
+    out_buf[2] = 0x0C; // length
+    out_buf[3] = 0x01; // command?
+    out_buf[4] = 0x00; // unknown
+    memcpy(&out_buf[5], device_name, 10); // device name
+    crc = generateCrc(&out_buf[3], 12);
+    out_buf[15] = (crc >> 8) & 0xFF; // crc 1
+    out_buf[16] = (crc >> 0) & 0xFF; // crc 2
+    out_buf[17] = 0x5A; // footer 1
+    out_buf[18] = 0x5A; // footer 2
 
     Exec_Get_Enc_Packet_SN(out_buf, 19, device_name);
 

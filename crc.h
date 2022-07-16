@@ -1,7 +1,3 @@
-//
-// Created by Iscle Gil on 12/7/22.
-//
-
 #ifndef DANARS_CRC_H
 #define DANARS_CRC_H
 
