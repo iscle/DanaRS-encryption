@@ -19,14 +19,14 @@ static int8_t signed_output_data[] = {
 static uint8_t signed_output_data_len = sizeof(signed_output_data);
 
 int main() {
+    printf("DanaRS decryptor by Iscle!\n");
+
     char *device_name = "TKJ00172FB";
     uint8_t opcode = (uint8_t) signed_opcode;
     uint8_t *input_data = (uint8_t *) signed_input_data;
     uint8_t input_data_len = signed_input_data_len;
     uint8_t *output_data = (uint8_t *) signed_output_data;
     uint8_t output_data_len = signed_output_data_len;
-
-    printf("Hello, World!\n");
 
     uint8_t *out_data = malloc(output_data_len);
 
