@@ -7,7 +7,7 @@
 #include "crc.h"
 
 extern char _enhancedEncryption;
-extern int _someGlobalVar;
+extern int _unknown_global_1;
 
 int decrypt_packet(uint8_t *out_data, int out_data_len, const uint8_t *in_data, int in_data_len, const char *device_name) {
     // packet structure
@@ -27,7 +27,7 @@ int decrypt_packet(uint8_t *out_data, int out_data_len, const uint8_t *in_data, 
     memcpy(tmp, in_data, in_data_len);
 
     Exec_Get_Enc_Packet_SN(tmp, in_data_len, device_name);
-    if (_someGlobalVar > 1 && _enhancedEncryption == 0) {
+    if (_unknown_global_1 > 1 && _enhancedEncryption == 0) {
         printf("Not implemented yet: Decryption by time, password and passkey\n");
         // TODO: Replace parameter deviceName with the correct values
         Exec_Get_Enc_Packet_Time(tmp, in_data_len, device_name);

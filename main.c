@@ -6,7 +6,7 @@
 #include "decrypt.h"
 
 char _enhancedEncryption;
-int _someGlobalVar;
+int _unknown_global_1;
 
 static int8_t signed_opcode = 0;
 static int8_t signed_input_data[] = {
